@@ -6,9 +6,21 @@
 
 
 <ul class="text-center font-medium my-12 gap-4 flex-row">
-  <li>Blogs</li>
-  <li>Videos</li>
-  <li>Projects</li>
+  <li>
+    <a href="/blogs">
+      Blogs
+    </a>
+  </li>
+  <li>
+    <a href="/videos">
+      Videos
+    </a>
+  </li>
+  <li>
+    <a href="/projects">
+      Projects
+    </a>
+  </li>
 </ul>
 
 <style>

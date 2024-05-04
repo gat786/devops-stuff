@@ -27,7 +27,7 @@
 
 <div>
   <button
-    class="bg-white border border-gray-200 text-yellow-300 py-1 px-2 rounded-md size-16"
+    class="bg-white border border-gray-200 text-yellow-300 py-1 px-2 rounded-md size-12"
     on:click={() => {
       toggleTheme({ themeName: "light" });
     }}
@@ -35,7 +35,7 @@
     <Sun />
   </button>
   <button
-    class="bg-black text-white py-1 px-2 rounded-md size-16"
+    class="bg-black text-white py-1 px-2 rounded-md size-12"
     on:click={() => {
       toggleTheme({ themeName: "dark" });
     }}

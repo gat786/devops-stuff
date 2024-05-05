@@ -10,9 +10,14 @@
 
   let styles = "";
   let showTooltip = false;
+  let toastMessage = "Example Toast Message";
 
-  export const invokeShowTooltip = ({ _componentType = ToastType.INFO }) => {
+  export const invokeShowTooltip = ({ 
+    _componentType = ToastType.INFO,
+    _message = "Hi I am a toast",
+   }) => {
     setComponentType(_componentType);
+    toastMessage = _message;
     showTooltip = true;
 
     setTimeout(() => {
@@ -57,7 +62,7 @@
     {#if componentType === ToastType.WARNING}
       <WarningIcon />
     {/if}
-    Hi I am a toast
+    {toastMessage}
   </div>
 </div>
 

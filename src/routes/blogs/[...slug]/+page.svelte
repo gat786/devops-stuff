@@ -65,12 +65,6 @@
 
   <Comments website-id={11051} page-id={`blogs/${data.front_matter.url_postfix}`} />
   <div class="fixed bottom-10 left-10 z-10">
-    <button class="bg-white px-4 py-1 rounded-md" 
-      on:click={() => {
-        toastComponent.invokeShowTooltip({ _componentType: ToastType.ERROR });
-      }}>
-      Show Tooltip on this page
-    </button>
   </div>
     <Toast bind:this={toastComponent}/>
 </div>

@@ -11,8 +11,8 @@
   let styles = "";
   let showTooltip = false;
 
-  export const invokeShowTooltip = () => {
-    console.log("Tooltip will be shown");
+  export const invokeShowTooltip = ({ _componentType = ToastType.INFO }) => {
+    setComponentType(_componentType);
     showTooltip = true;
 
     setTimeout(() => {
@@ -20,12 +20,8 @@
     }, 3000);
   };
 
-  onMount(() => {
-    setTimeout(() => {
-      console.log("I will be disabled now");
-    }, 3000);
-
-    //  set styles based on componentType
+  const setComponentType = (customType: ToastType) => {
+    componentType = customType;
     switch (componentType) {
       case ToastType.INFO:
         styles = "text-white bg-gray-800 dark:bg-white dark:text-gray-800";
@@ -40,6 +36,10 @@
         styles = "bg-orange-500 text-white dark:bg-white dark:text-orange-500";
         break;
     }
+  };
+  onMount(() => {
+    //  set styles based on componentType
+    setComponentType(componentType);
   });
 </script>
 

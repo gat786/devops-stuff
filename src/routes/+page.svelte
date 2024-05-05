@@ -1,9 +1,8 @@
-<h1 class="font-bold font-mono text-center text-4xl mt-20 mb-4">The DevOps Stuff</h1>
+<header>
+	<title>Devops Stuff</title>
+</header>
 
-<dd class="text-center">
-  For Posting DevOps Related Learnings that I get
-</dd>
-
+<Heading />
 
 <ul class="text-center font-medium my-12 gap-4 flex-row">
   <li>
@@ -33,3 +32,7 @@
     cursor: pointer;
   }
 </style>
+
+<script lang="ts">
+  import Heading from "../components/heading.svelte";
+</script>

@@ -3,11 +3,6 @@
 	import ThemeSwitch from "../components/theme-switch.svelte";
 </script>
 
-<header>
-	<title>Devops Stuff</title>
-</header>
-
-
 <div>
 	<div class="fixed top-0 right-0 m-4">
 		<ThemeSwitch/>

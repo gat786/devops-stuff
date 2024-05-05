@@ -42,4 +42,19 @@
   <article class="hidden">
     {data.content}
   </article>
+
+  <div class="my-8">
+    ----------------------------------------
+  </div>
+
+  <div class="my-8 text-2xl font-thin text-center">
+    Thank you for reading my blog, <br/>
+    Hope you enjoyed it. <br/>
+    Please leave a comment if you have any feedback.
+  </div>
+
+  <script defer src="https://cdn.commento.io/js/commento.js"></script>
+  <div class="w-1/2">
+    <div id="commento"></div>
+  </div>
 </div>

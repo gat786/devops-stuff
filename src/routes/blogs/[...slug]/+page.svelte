@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PageData } from './$types';
+  import { Comments } from "@hyvor/hyvor-talk-svelte";
   export let data: PageData;
   import { onMount } from 'svelte';
 
@@ -53,8 +54,5 @@
     Please leave a comment if you have any feedback.
   </div>
 
-  <script defer src="https://cdn.commento.io/js/commento.js"></script>
-  <div class="w-1/2">
-    <div id="commento"></div>
-  </div>
+  <Comments website-id={11051} page-id={`blogs/${data.front_matter.url_postfix}`} />
 </div>

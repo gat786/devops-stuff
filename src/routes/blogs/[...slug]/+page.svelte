@@ -5,6 +5,8 @@
   import { onMount } from 'svelte';
 
   import Heading from '../../../components/heading.svelte';
+  import Toast from '../../../components/toast.svelte';
+  import { ToastType } from '$lib/models/toasttype';
 
   onMount(() => {
     const blogContent = document.getElementById('blog-content');
@@ -13,10 +15,17 @@
     }
   });
 
+  let toastComponent: Toast;
+  
 </script>
 
 <head>
   <title>{data.front_matter.title}</title>
+  <meta property="og:title" content={data.front_matter.title} />
+  <meta property="og:description" content={data.front_matter.description} />
+  <meta property="og:image" content={data.front_matter.posterImage} />
+  <meta property="og:url" content={`https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`} />
+  <meta property="og:type" content="article" />
 </head>
 
 <Heading />
@@ -55,4 +64,11 @@
   </div>
 
   <Comments website-id={11051} page-id={`blogs/${data.front_matter.url_postfix}`} />
+  <div class="fixed bottom-10 left-10 z-10">
+    <button class="bg-white px-4 py-1 rounded-md" 
+      on:click={toastComponent.invokeShowTooltip}>
+      Show Tooltip on this page
+    </button>
+  </div>
+    <Toast bind:this={toastComponent} componentType={ToastType.WARNING}/>
 </div>

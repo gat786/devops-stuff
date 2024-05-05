@@ -3,6 +3,7 @@ title: Third title
 created_on: 2022-09-17 00:00:42
 description: This is my third blog post
 tags: ['blog', 'third']
+posterImage: /images/catt-kitten.webp
 authors: ['ganesht049@gmail.com']
 ---
 

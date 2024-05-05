@@ -15,7 +15,14 @@ export const load: PageServerLoad<BlogList> = async ({ params }) => {
   const blogs_remapped = blogs.map((blog) => {
     const file_matter = matter.read(blog);
 
-    const { title, description, created_on, tags, authors } = file_matter.data;
+    const { 
+      title, 
+      description, 
+      created_on, 
+      tags, 
+      authors, 
+      posterImage 
+    } = file_matter.data;
     let url_postfix = blog.replace(blog_folder_prefix, '');
     url_postfix = url_postfix.replace('.md', '');
     let blog_object: Blog = {
@@ -24,6 +31,7 @@ export const load: PageServerLoad<BlogList> = async ({ params }) => {
         description,
         created_on,
         tags,
+        posterImage,
         authors,
         file_path: blog,
         url_postfix: url_postfix
@@ -37,9 +45,6 @@ export const load: PageServerLoad<BlogList> = async ({ params }) => {
   const sorted_blogs = blogs_remapped.sort((a, b) => {
     return new Date(b.front_matter.created_on).getTime() - new Date(a.front_matter.created_on).getTime();
   });
-
-
-  console.log(sorted_blogs);
 
   return {
     blogs: sorted_blogs

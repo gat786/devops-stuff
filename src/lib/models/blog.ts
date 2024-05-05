@@ -11,6 +11,7 @@ export type FrontMatter = {
   title: string;
   created_on: Date;
   file_path: string;
+  posterImage: string;
   url_postfix: string;
   tags: string[];
   description: string;

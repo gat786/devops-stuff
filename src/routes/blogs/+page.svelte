@@ -1,11 +1,10 @@
 <script lang="ts">
   import Heading from "../../components/heading.svelte";
+  import ShareIcon from "$lib/icons/share.svelte";
   import type { PageData } from "./$types";
   export let data: PageData;
 
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-
-  console.log(data)
 </script>
 
 <Heading/>
@@ -16,17 +15,35 @@
 
 <main class="flex flex-col items-center mt-4 w-full">
   <h2 class="text-xl font-bold font-mono">Latest Blogs</h2>
-  <ul>
+  <ul class="w-full flex flex-col items-center">
     {#each data.blogs as blog}
-      <a href={`/blogs/${blog.front_matter.url_postfix}`}>
-        <div class="border w-96 h-48 m-4">
-          <li>
-            <a href={`blogs/${blog.front_matter.url_postfix}`}>
-              <h2>{blog.front_matter.title}</h2>
+      <div class=" w-2/3">
+        <div class="border m-4 p-2 flex flex-row">
+          <img 
+            src={`${blog.front_matter.posterImage}`} 
+            class="w-48 h-48 object-cover" 
+            alt={`poster for ${blog.front_matter.title}`} />
+          <div class="flex flex-col my-4 mx-4 gap-4">
+            <a href={`/blogs/${blog.front_matter.url_postfix}`} >
+              <h2 class="text-xl font-mono font-medium truncate">{blog.front_matter.title}</h2>
             </a>
-          </li>
+            <div class="text-sm font-thin">Date - {blog.front_matter.created_on.toLocaleDateString()}</div>
+            <div class="text-sm font-thin">Authors - {blog.front_matter.authors.join(", ")}</div>
+            <div class="flex gap-4">
+              Share
+              <button on:click={async () => {
+                await navigator.share({
+                  title: blog.front_matter.title,
+                  text: blog.front_matter.description,
+                  url: `https://devops-stuff.dev/blogs/${blog.front_matter.url_postfix}`
+                })
+              }}>
+                <ShareIcon />
+              </button>
+            </div>
+          </div>
         </div>
-      </a>
+      </div>
     {/each}
   </ul>
 </main>

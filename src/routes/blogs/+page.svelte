@@ -3,8 +3,6 @@
   import ShareIcon from "$lib/icons/share.svelte";
   import type { PageData } from "./$types";
   export let data: PageData;
-
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 </script>
 
 <Heading/>

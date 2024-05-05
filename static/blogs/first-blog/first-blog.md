@@ -8,7 +8,7 @@ authors: ['ganesht049@gmail.com']
 ---
 
 
-[![App Platorm](/images/catt-kitten.webp)](https://www.digitalocean.com/products/app-platform)
+![App Platorm](/images/catt-kitten.webp)
 
 
 ### Hi I am the third blog

@@ -6,7 +6,11 @@ tags: ['blog', 'third']
 authors: ['ganesht049@gmail.com']
 ---
 
-# Hi I am the third blog
+
+[![App Platorm](/images/catt-kitten.webp)](https://www.digitalocean.com/products/app-platform)
+
+
+### Hi I am the third blog
 
 I am writing this to test my date sorting function this is the timestamp 
 `2023-09-19 21:05:39` is the current timestamp I am writing this blog on but I

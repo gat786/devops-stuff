@@ -14,15 +14,19 @@
   <title>Latest Blogs</title>
 </head>
 
-<main>
-  <h1>Latest Blogs</h1>
+<main class="flex flex-col items-center mt-4 w-full">
+  <h2 class="text-xl font-bold font-mono">Latest Blogs</h2>
   <ul>
     {#each data.blogs as blog}
-      <li>
-        <a href={`blogs/${blog.front_matter.url_postfix}`}>
-          <h2>{blog.front_matter.title}</h2>
-        </a>
-      </li>
+      <a href={`/blogs/${blog.front_matter.url_postfix}`}>
+        <div class="border w-96 h-48 m-4">
+          <li>
+            <a href={`blogs/${blog.front_matter.url_postfix}`}>
+              <h2>{blog.front_matter.title}</h2>
+            </a>
+          </li>
+        </div>
+      </a>
     {/each}
   </ul>
 </main>

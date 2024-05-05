@@ -11,6 +11,6 @@ authors: ['ganesht049@gmail.com']
 ![Body Guard protecting computers](/images/cartoon-protector.webp)
 
 
-### I am a new blog header update me accordingly
+### 
 
 EOF 

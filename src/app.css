@@ -11,3 +11,9 @@ body {
 html {
   @apply dark:text-gray-200;
 }
+
+.zoomable {
+  cursor: -moz-zoom-in; 
+  cursor: -webkit-zoom-in; 
+  cursor: zoom-in;
+}

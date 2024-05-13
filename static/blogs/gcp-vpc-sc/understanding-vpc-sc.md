@@ -63,7 +63,7 @@ look like.
 ![VPC SC Disabled](/images/vpc-sc/with-perimeter.png)
 
 *This image showcases how GCP API calls would look like in an*
-*organisation which does have VPC SC perimeters*
+*organisation which has VPC SC perimeters defined*
 
 In the above images I am trying to convey that you can use VPC SC as a method 
 to protect GCP APIs from being accessed from outside the perimeter even when
@@ -108,6 +108,22 @@ manner below.
     You can define an Access Level which says that only these IP Addresses 
     when requesting from outside the Perimeter can access the Restricted Service.
 
-5. **Egress & Ingress Control** - These are the rules which you can define to 
-    allow the flow of traffic from within two different organisations.
+    But Ultimately are rules which specify how and where your Google API's 
+    should be accessed and they apply to all of the services in your perimeter.
+
+
+5. **Egress & Ingress Control** - These are the rules which you can apply on 
+    the VPC perimeter controlling in which direction direction do you want the access to work.
+    
+    For E.g. You might have Service Account from some other organisation 
+    running inside your environment and you want that service account to be 
+    able to authenticate itself and call resourece from that other organisation.
+
+    There might also be situations where you want your service accounts be
+    able to access your services outside the perimeter but you want to control
+    the number of services it can access because you can specify 
+    `allowed methods` in Egress and Ingress rules.
+
+    You can attach Access Levels to Egress and Ingress Levels thereby 
+    controlling their level of access from outside the perimeter.
    

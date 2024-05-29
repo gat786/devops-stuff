@@ -40,10 +40,12 @@
 				<XMark/>
 			</button>
 			{#if (imageUrlToShow != null)}
+			<div class="z-40 h-screen flex items-center justify-center">
 				<img
 					src={imageUrlToShow.toString()}
-					alt="currently zoomed" 
-					class="z-40 fixed"/>
+					alt="currently zoomed"
+					class=""/>
+			</div>
 			{/if}
 			
 		</div>

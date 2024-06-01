@@ -56,6 +56,6 @@ Widely speaking Github Action file has 3 main parts.
 2. Trigger Definitions.
 3. Action Steps Definitions.
 
-And it would look something like this 
+And it would look something like this
 
-<script src="https://gist.github.com/gat786/77b5fa9d41ee8445cc1d71b8b8318c04.js"> </script>
+<script src="https://gist.github.com/gat786/77b5fa9d41ee8445cc1d71b8b8318c04.js?theme=dark"> </script>

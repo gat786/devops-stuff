@@ -8,12 +8,6 @@
   import Toast from '../../../components/toast.svelte';
   import { ToastType } from '$lib/models/toasttype';
 
-  onMount(() => {
-    const blogContent = document.getElementById('blog-content');
-    if (blogContent != null) {
-      blogContent.innerHTML = data.content;
-    }
-  });
 
   let toastComponent: Toast;
   
@@ -48,6 +42,7 @@
     </div>
   </div>
   <article id="blog-content" class="prose dark:prose-invert mt-4">
+    {@html data.content}
   </article>
   <article class="hidden">
     {data.content}

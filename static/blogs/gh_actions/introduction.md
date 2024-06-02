@@ -59,3 +59,59 @@ Widely speaking Github Action file has 3 main parts.
 And it would look something like this
 
 <script src="https://gist.github.com/gat786/77b5fa9d41ee8445cc1d71b8b8318c04.js?theme=dark"> </script>
+
+Notice that in the above embed we have 3 sections which I have marked using 
+`# comments` i.e. metadata, trigger and jobs section.
+
+Lets go over these 1 by 1.
+
+1. Metadata -
+   
+   Metadata section actually contains the content that is usually used to 
+   describe the Github Action. You can have a `name` and then a `run-name`
+   the main difference between them is `name` is shown in the list when you
+   click on Actions tab in a repository and `run-name` can be used to specify
+   names for a particular execution instance as it can include event-specific
+   information in it. 
+
+   For Example -
+
+   Name - `Build Action`
+
+   Run Name - `Build Action #34`
+
+
+2. Triggers -
+   
+   Triggers section is used to define when do you want for this Action to
+   be executed. Triggers can be of a lot of different types like 
+
+   * Push (tags, branches)
+   * Pull Request (updates)
+   * Manual Dispatch
+   * Workflow Call
+
+3. Jobs -
+   
+   Jobs are the actual series of actions that get executed when this action
+   is triggered. These are list of Jobs which individually have list of steps
+   in them which get executed when the action is executed.
+
+
+There are other sections in a Github Actions File that you can create but
+these 3 are the most important ones. I will talk about other fields in my 
+upcoming blogs. But Lets now see at Jobs in a little bit more detail.
+
+Jobs item in a action is a collection of Job item which in turn is a list of
+steps. All the jobs defined in a action run parallelly by default but if you
+want you can run then sequentially by defining dependency of a job on another
+by using the `needs` field inside a job definition. Each Job runs on a runner
+which can be specified using `runs-on` field of the job definition.
+
+Each job as previously mentioned is a list of steps and the steps are executed
+sequentially as they are defined inside a job. Each step can be a predefined
+action or a script that you have defined either in the workflow itself or 
+somewhere in your codebase. For Example if you look at the gist we have 
+embedded up a few lines above you will that the very first step is `Checkout`
+which is actually an action which is defined in the repository 
+<a href="https://github.com/actions/checkout" target="_blank">actions/checkout</a>

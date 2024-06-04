@@ -58,7 +58,7 @@ Widely speaking Github Action file has 3 main parts.
 
 And it would look something like this
 
-<script src="https://gist.github.com/gat786/77b5fa9d41ee8445cc1d71b8b8318c04.js?theme=dark"> </script>
+<script src="https://gist.github.com/gat786/77b5fa9d41ee8445cc1d71b8b8318c04.js"> </script>
 
 Notice that in the above embed we have 3 sections which I have marked using 
 `# comments` i.e. metadata, trigger and jobs section.
@@ -108,6 +108,8 @@ want you can run then sequentially by defining dependency of a job on another
 by using the `needs` field inside a job definition. Each Job runs on a runner
 which can be specified using `runs-on` field of the job definition.
 
+#### Actions and Scripts
+
 Each job as previously mentioned is a list of steps and the steps are executed
 sequentially as they are defined inside a job. Each step can be a predefined
 action or a script that you have defined either in the workflow itself or 
@@ -115,3 +117,63 @@ somewhere in your codebase. For Example if you look at the gist we have
 embedded up a few lines above you will that the very first step is `Checkout`
 which is actually an action which is defined in the repository 
 <a href="https://github.com/actions/checkout" target="_blank">actions/checkout</a>
+
+So in short, if you want to run a self defined script you can use the 
+`run` keyword to describe the script and if you want to use some action that is
+precreated you can use the `uses` key to define which action you want to use.
+The exhaustive list of all precreated Github Actions can be found here 
+
+![Github Actions Marketplace](/images/gh-actions/actions-marketplace.webp)
+<center>Ref - <a href="https://github.com/marketplace?type=actions">Github Actions Marketplace</a></center>
+
+Here you can find actions for almost anything you can think off, we can find
+actions for building Android Apps. Language specific builds for apps written in
+[Java](https://github.com/marketplace/actions/setup-java-jdk), 
+[Dotnet](https://github.com/marketplace/actions/setup-net-core-sdk), 
+[Kotlin](https://github.com/marketplace/actions/setup-kotlin) etc. Actions that can check 
+[website vulnerabilities](https://github.com/marketplace/actions/is-website-vulnerable), 
+[send an alert SMS](https://github.com/marketplace/actions/twilio-sms) etc 
+and a lot of other cool things
+
+#### Inputs and Environment Variables
+
+Now to use most of these actions you would need to provide some values to them,
+Lets say for example you want to have an an action that sends an alert SMS
+the action would atleast require you to provide it some mobile number to which you want
+it to send an SMS.
+
+Like this 
+
+<script src="https://gist.github.com/gat786/9690fef9ae2d58b60dc20212d21397f2.js"></script>
+
+Notice that we provide the number that we want to send an SMS to as an input. 
+We also provide a bunch of other information but we can talk about it later.
+For now lets make sure that you understand that inorder to provide input to an
+action you can use the `with` keyword and provide the inputs which are required
+by an action.
+
+The same can be done for your scripts. Yes, normally when we write scripts we 
+utilise a lot of environment variables and these environment variables can be
+set for a job using the `env` keyword over a job definition. 
+
+For Example ->
+
+<script src="https://gist.github.com/gat786/deb0bd78899e5f3dbe0b28ee8e6579ad.js"></script>
+
+Notice that you can set env variables at the job level or even at the workflow
+level. At the workflow level you can define it under `env` key as key-value
+pairs, just as you would at the job level. You can also override the values which
+are defined at workflow level inside an action when needed to, so basically you
+can use the env variables defined at the workflow level to be like default options
+and you can define most custom options at workflow level. 🧠
+
+#### Signing Off
+
+While there are many other things that you can do with Github Actions but these
+are the very basics that you should understand and these will take you a long
+way if you do not understand them very well currently.
+
+I will post other blogs soon where I cover more things in more depth.
+
+Thank you for reading 🫰
+See you soon.

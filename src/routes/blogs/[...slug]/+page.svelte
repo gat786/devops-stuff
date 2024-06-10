@@ -25,8 +25,8 @@
 <Heading />
 
 <div class="flex flex-col items-center w-screen">
-  <div class="flex flex-col items-center w-2/3">
-    <h2 class="text-2xl font-bold mt-4">
+  <div id="sticky-item" class="flex flex-col items-center w-2/3 ">
+    <h2 class="text-2xl font-bold mt-4 text-center">
       {data.front_matter.title}
     </h2>
     <div class="font-thin my-4 text-center">
@@ -41,7 +41,7 @@
       ----------------------------------------
     </div>
   </div>
-  <article id="blog-content" class="prose dark:prose-invert mt-4">
+  <article id="blog-content" class="prose dark:prose-invert mt-4 mx-8 w-10/12">
     {@html data.content}
   </article>
   <article class="hidden">

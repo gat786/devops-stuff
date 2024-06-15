@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "generate": "index.js"
+    "generate": "node index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "five-server": "^0.3.3",
+    "http-server": "^14.1.1",
+    "puppeteer": "^22.11.0"
+  }
 }

@@ -30,3 +30,7 @@ export type BlogList = {
 export type BlogFiles = {
   file_names: string[];
 }
+
+export type LicenseContent = {
+  license: string
+}

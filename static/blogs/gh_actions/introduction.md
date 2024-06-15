@@ -3,7 +3,7 @@ title: Introduction to GH Actions
 created_on: 2024-05-29
 description: This blogs gives a person introduction to what GH Actions are and what you can achieve by using it
 tags: ['Github', 'Github Actions', 'Devops', 'Automation', 'CI/CD']
-posterImage: /images/gh-actions/logo.png
+posterImage: /images/gh-actions/overview-actions-simple.png
 authors: ['ganesht049@gmail.com']
 ---
 

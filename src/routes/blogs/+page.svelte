@@ -28,8 +28,8 @@
             <div class="text-sm font-thin">Date - {blog.front_matter.created_on.toLocaleDateString()}</div>
             <div class="text-sm font-thin">Authors - {blog.front_matter.authors.join(", ")}</div>
             <div class="flex gap-4">
-              Share
-              <button on:click={async () => {
+              
+              <button class="flex gap-4 align-middle" on:click={async () => {
                 if (navigator.canShare()){
                   await navigator.share({
                     title: blog.front_matter.title,
@@ -40,6 +40,7 @@
                   
                 }
               }}>
+                Share
                 <ShareIcon />
               </button>
             </div>

@@ -13,14 +13,14 @@
   
 </script>
 
-<head>
+<svelte:head>
   <title>{data.front_matter.title}</title>
   <meta property="og:title" content={data.front_matter.title} />
   <meta property="og:description" content={data.front_matter.description} />
   <meta property="og:image" content={data.front_matter.posterImage} />
   <meta property="og:url" content={`https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`} />
   <meta property="og:type" content="article" />
-</head>
+</svelte:head>
 
 <Heading />
 

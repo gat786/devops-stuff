@@ -25,6 +25,24 @@
 				}				
 			}
 		}
+
+		const scriptTags = document.getElementsByTagName("script");
+
+		for(let i = 0; i < scriptTags.length; i++ ) {
+			let currentScriptTag = scriptTags.item(i);
+
+			if(currentScriptTag?.src?.startsWith("https://gist.github.com")) {
+				let reminderDiv = document.createElement("div");
+				reminderDiv.classList.add("border", "border-white", "text-center","my-2", "text-sm")
+
+				let italicGistReminder = document.createElement("i");
+				italicGistReminder.textContent = "Note - There should be a gist embed below me, if you don't see it. Please refresh the page."
+				
+				reminderDiv.appendChild(italicGistReminder);
+
+				currentScriptTag.insertAdjacentElement('afterend' , reminderDiv);
+			}
+		}
 	})
 
 </script>

@@ -10,3 +10,7 @@ authors: ['ganesht049@gmail.com']
 ![Github Actions Variables](/images/gh-actions/github-actions-variables.webp)
 
 ### GH Actions Variables and more - Environment Variables, Secrets and Outputs
+
+Hello Friends, in my last blog we talked about how a Github Action is 
+structured and how you can create one. I wanted to expand on that and talk to
+you about variables that you can find in a GH Action a bit more.

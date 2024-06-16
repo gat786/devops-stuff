@@ -16,6 +16,17 @@ jobs:
       - name: install dependencies
         run: npm install
       
+      - name: install caddy server
+        run: |
+          sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+          curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+          curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+          sudo apt update
+          sudo apt install caddy
+
+      - name: run caddy server on port 8080
+        run: caddy file-server --root og-image-static-content --listen 8080
+
       - name: build app
         run: npm run build
       

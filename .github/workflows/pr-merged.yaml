@@ -1,0 +1,27 @@
+name: Deploy Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      
+      - name: install dependencies
+        run: npm install
+      
+      - name: build app
+        run: npm run build
+      
+      - name: create build zip file
+        uses: actions/upload-artifact@v4
+        with: 
+          name: build.zip
+          path: |
+            build/

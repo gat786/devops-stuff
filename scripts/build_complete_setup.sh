@@ -12,5 +12,10 @@ mkdir $OG_IMAGE_DIR/build/
 cp -r build/ $OG_IMAGE_DIR/build/
 
 cd $OG_IMAGE_DIR
+
+npx http-server content &
+
 npm install
 npm run generate
+
+killall http-server

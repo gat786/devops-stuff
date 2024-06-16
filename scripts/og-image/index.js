@@ -7,23 +7,21 @@ import Handlebars from 'handlebars';
 import { options } from 'marked';
 import { title } from 'node:process';
 
-const takeScreenshot = async ( path = null ) => {
+const takeScreenshot = async ({
+    filePath = null,
+    webRoute = null
+  }) => {
   const browser = await puppeteer.launch({
     product: 'firefox'
   });
   const page = await browser.newPage();
-  const current_dir = process.cwd();
-
-  const og_image_file = `${current_dir}/content/index.html`;
-
-  console.log(`url ${og_image_file}`)
-  await page.goto("http://127.0.0.1:3000/");
+  
+  let route = webRoute != null ? webRoute : '';
+  await page.goto(`http://127.0.0.1:8080/${route}`);
   await page.setViewport({ width: 1200, height: 628 });
   
-  let ogImagePath = path != null ? path : 'screenshot.jpg'
+  let ogImagePath = filePath != null ? filePath : 'screenshot.jpg'
   await page.screenshot({ path: ogImagePath });
-  
-
   await browser.close();
 };
 
@@ -39,12 +37,12 @@ const startExpress = async () => {
 };
 
 const findHTMLFiles = async () => {
-
   console.log(`current working directory: ${process.cwd()}`);
   const htmlFiles = await glob(`${process.cwd()}/build/**/*.html`, { ignore: 'node_modules/**' })
   
-  htmlFiles.forEach((file) => {
-    fs.readFile(file, 'utf-8',(err, data) => {
+  htmlFiles.forEach(async (file) => {
+    console.log(`processing ${file}`)
+    await fs.readFile(file, 'utf-8',async (err, data) => {
       if(err){
         console.error(err);
         return;
@@ -54,10 +52,12 @@ const findHTMLFiles = async () => {
       let headElement = htmlDoc?.head;
 
       const metaElements = headElement?.getElementsByTagName("meta");
+      console.log(`found meta elements`);
       for (let metaElementIndex = 0; metaElementIndex < metaElements.length; metaElementIndex++) {
         const metaElement = metaElements.item(metaElementIndex);
         let metaProperty = metaElement.getAttribute("property");
         if (metaProperty == "og:title") {
+          console.log('found title file, creating og image');
           let metaTitle = metaElement.getAttribute("content");
           let contentFolder = `${process.cwd()}/content`;
           const template_index = fs.readFileSync(
@@ -66,19 +66,22 @@ const findHTMLFiles = async () => {
           );
           const template  = Handlebars.compile(template_index);
           const indexHtml = template({ title: metaTitle });
-
+          
+          let fileName = metaTitle.split(' ').join('-');
+          let generatedFilePath = `generated/${fileName}.html`
           fs.writeFileSync(
-            `${contentFolder}/index.html`,
+            `${contentFolder}/${generatedFilePath}`,
             indexHtml
           )
 
-          startExpress();
-          let path = `screenshot/${file}.jpg`
-          takeScreenshot(path);
+          // startExpress();
+          let path = `./screenshots/${fileName}.jpg`
+          console.log(`taking screenshot`);
+          await takeScreenshot({webRoute: generatedFilePath, filePath:  path});
         }
       }
     })
   })
 }
 
-findHTMLFiles()
+await findHTMLFiles()

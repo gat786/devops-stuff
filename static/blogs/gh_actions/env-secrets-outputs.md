@@ -1,7 +1,7 @@
 ---
-title: GH Actions Variables and more - Environment Variables, Secrets and Outputs
+title: GH Actions Variables
 created_on: 2024-06-10
-description: GH Actions - Secrets, Variables and 
+description: GH Actions Variables - Understanding Multi Job actions, using Secrets, Variables and Outputs
 tags: ['Github', 'Github Actions', 'Devops', 'Automation', 'CI/CD']
 posterImage: /images/gh-actions/github-actions-variables.webp
 authors: ['ganesht049@gmail.com']

@@ -3,11 +3,12 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "bash scripts/build_complete_setup.sh",
+		"build": "bash build.sh",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"generate-og": "bash scripts/generate-og.sh"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
@@ -34,9 +35,13 @@
 	"type": "module",
 	"dependencies": {
 		"@hyvor/hyvor-talk-svelte": "^0.0.7",
-		"glob": "^10.3.12",
+		"@types/jsdom": "^21.1.7",
+		"glob": "^10.4.1",
 		"gray-matter": "^4.0.3",
+		"handlebars": "^4.7.8",
 		"js-image-zoom": "^0.7.0",
-		"marked": "^12.0.2"
+		"jsdom": "^24.1.0",
+		"marked": "^12.0.2",
+		"puppeteer": "^22.11.0"
 	}
 }

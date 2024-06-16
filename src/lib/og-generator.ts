@@ -29,7 +29,7 @@ type generateOgFileArgs = {
 
 const takeScreenshot = async ( options: takeScreenshotArgs ) => {
   const browser = await puppeteer.launch({
-    product: 'firefox'
+    product: 'chrome'
   });
   const page = await browser.newPage();
   

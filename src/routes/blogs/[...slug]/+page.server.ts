@@ -22,6 +22,7 @@ export const load = async ({ params }) => {
 
   let ogFileName = `${title.split(' ').join('-')}`;
   let ogFilePath = `/images/ogImages/${ogFileName}`
+  console.log({ogFileName,ogFilePath})
   await generateOgFile({
     ogContent: {
       title: title
@@ -36,7 +37,7 @@ export const load = async ({ params }) => {
       description, 
       created_on,
       posterImage,
-      ogFilePath: ogFilePath + '.jpg',
+      ogFilePath: '/images/catt-kitten.webp',
       tags,
       authors, 
       file_path: blog_file_path,

@@ -11,6 +11,5 @@ authors: ['ganesht049@gmail.com']
 
 ### GH Actions Variables and more - Environment Variables, Secrets and Outputs
 
-Hello Friends, in my last blog we talked about how a Github Action is 
-structured and how you can create one. I wanted to expand on that and talk to
-you about variables that you can find in a GH Action a bit more.
+> Note if you haven't had a chance to read my previous blog please have a read
+>  it is available [here](/blogs/gh_actions/introduction)

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'path';
 import { JSDOM } from 'jsdom';
 import Handlebars from 'handlebars';
+import satori from 'satori';
 
 let rootDir = process.cwd();
 let globSearchPattern = `${rootDir}/build/**/*.html`;
@@ -41,6 +42,37 @@ const takeScreenshot = async ( options: takeScreenshotArgs ) => {
   await page.screenshot({ path: ogImagePath });
   await browser.close();
 };
+
+const takeScreenshotSatori = async ( options: takeScreenshotArgs ) => {
+  if (options.webpagePath != null){
+    let fullFilePath = `${staticContentFolder}/${options.webpagePath}`;
+    console.log(fullFilePath)
+    await fs.readFile(fullFilePath, async (err, data) => {
+      if (err){
+        console.error("Error fetching the file, make sure you have some file as template");
+        return null;
+      }
+      let str = new TextDecoder().decode(data);
+      let robotoArrayBuffer = await fs.readFileSync(`${rootDir}/static/fonts/Roboto-Black.ttf`)
+      const svgFile = await satori(str, {
+        width: 1200,
+        height: 628,
+        fonts: [
+          {
+            name: 'Roboto',
+            // Use `fs` (Node.js only) or `fetch` to read the font as Buffer/ArrayBuffer and provide `data` here.
+            data: robotoArrayBuffer,
+            weight: 400,
+            style: 'normal',
+          },
+        ]
+      })
+      let fullPathToSvg = `${rootDir}/${options.screenshotStoragePath}`
+      console.log(`store svg at : ${fullPathToSvg}`)
+      fs.writeFileSync(options.screenshotStoragePath!, svgFile);
+    })
+  }
+}
 
 const findHTMLFiles = async () => {
   console.log(`current working directory: ${rootDir}`);
@@ -86,9 +118,9 @@ const findHTMLFiles = async () => {
           )
 
           // startExpress();
-          let pathToJpg = `${ogImageFolder}/${fileName}.jpg`
+          let pathToJpg = `${ogImageFolder}/${fileName}.svg`
           console.log(`taking screenshot`);
-          await takeScreenshot({
+          await takeScreenshotSatori({
             webpagePath: fileName,
             screenshotStoragePath: pathToJpg
           });
@@ -120,9 +152,9 @@ export const generateOgFile = async (args: generateOgFileArgs) => {
   )
 
   // startExpress();
-  let pathToStoreImage = `${ogImageFolder}/${args.ogImageFileName}.jpg`
+  let pathToStoreImage = `${ogImageFolder}${args.ogImageFileName}.svg`
   console.log(`taking screenshot and storing it in `);
-  await takeScreenshot({
+  await takeScreenshotSatori({
     screenshotStoragePath: pathToStoreImage,
     webpagePath: `${generatedFilePath}`
   });

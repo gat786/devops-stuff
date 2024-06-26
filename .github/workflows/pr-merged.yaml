@@ -20,7 +20,7 @@ jobs:
         run: npm run build
       
       - name: create build zip file
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with: 
           name: build.zip
           path: |
@@ -41,5 +41,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: build.zip

@@ -21,7 +21,9 @@ jobs:
       
       - name: create build zip file
         uses: actions/upload-pages-artifact@v3
-        
+        with:
+          path: build/
+
   deploy:
     needs: build_website
     runs-on: ubuntu-latest

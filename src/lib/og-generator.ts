@@ -8,7 +8,7 @@ import Handlebars from 'handlebars';
 let rootDir = process.cwd();
 let globSearchPattern = `${rootDir}/build/**/*.html`;
 let staticContentFolder = `${rootDir}/og-image-static-content`;
-let ogImageFolder = `static/images/ogImages/`;
+let ogImageFolder = `static/images/ogImages`;
 if ( !fs.existsSync(ogImageFolder)){
   console.log('screenshots directory does not exist creating one');
   fs.mkdirSync(ogImageFolder);
@@ -34,7 +34,9 @@ const takeScreenshot = async ( options: takeScreenshotArgs ) => {
   const page = await browser.newPage();
   
   let route = options.webpagePath != null ? options.webpagePath : '';
-  await page.goto(`http://127.0.0.1:8080/${route}`);
+  let fullRouteToFile = `file:///${staticContentFolder}/${route}`
+  console.log(fullRouteToFile);
+  await page.goto(fullRouteToFile);
   await page.setViewport({ width: 1200, height: 628 });
   
   let ogImagePath = options.screenshotStoragePath != null ? options.screenshotStoragePath : 'screenshot.jpg'
@@ -121,7 +123,7 @@ export const generateOgFile = async (args: generateOgFileArgs) => {
 
   // startExpress();
   let pathToStoreImage = `${ogImageFolder}/${args.ogImageFileName}.jpg`
-  console.log(`taking screenshot and storing it in `);
+  console.log(`taking screenshot and storing it in ${pathToStoreImage}`);
   await takeScreenshot({
     screenshotStoragePath: pathToStoreImage,
     webpagePath: `${generatedFilePath}`

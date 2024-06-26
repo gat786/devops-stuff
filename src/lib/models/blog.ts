@@ -12,7 +12,7 @@ export type FrontMatter = {
   created_on: Date;
   file_path: string;
   posterImage: string;
-  ogFilePath: string;
+  ogFilePath: string | undefined;
   url_postfix: string;
   tags: string[];
   description: string;

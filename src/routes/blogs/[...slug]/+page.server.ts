@@ -20,15 +20,14 @@ export const load = async ({ params }) => {
 
   const parsed_html = await marked.parse(file_matter.content);
 
-  let ogFileName = `${title.split(' ').join('-')}`;
-  let ogFilePath = `/images/ogImages/${ogFileName}`
-  await generateOgFile({
-    ogContent: {
-      title: title
-    },
-    ogImageFileName: ogFileName,
-    pathToStoreImage: ogFilePath
-  });
+  let ogParams = {
+    pageType: 'Blog',
+    pageTitle: title
+  }
+  let urlParams = new URLSearchParams(ogParams);
+  let ogFileResponse = fetch(`/og?${urlParams.toString()}`)
+  console.log(ogFileResponse)
+  let ogFilePath = 'images/catt-kitten'
 
   let blog: Blog = {
     front_matter: { 
@@ -36,7 +35,6 @@ export const load = async ({ params }) => {
       description, 
       created_on,
       posterImage,
-      ogFilePath: ogFilePath + '.jpg',
       tags,
       authors, 
       file_path: blog_file_path,

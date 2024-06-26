@@ -34,7 +34,7 @@ jobs:
       id-token: write
     
     environment:
-      name: github-pages
+      name: build.zip
       url: ${{ steps.deployment.outputs.page_url }}
     
     steps:

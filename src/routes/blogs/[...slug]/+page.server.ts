@@ -27,7 +27,9 @@ export const load = async ({ params }) => {
   let ogFilePath = `/images/ogImages/${ogFileName}`
   await generateOgFile({
     ogContent: {
-      title: title
+      title: title,
+      publishedDate: (created_on as Date).toDateString(),
+      path: "Home > Blogs >"
     },
     ogImageFileName: ogFileName,
     pathToStoreImage: ogFilePath

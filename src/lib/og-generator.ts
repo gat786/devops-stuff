@@ -21,7 +21,9 @@ type takeScreenshotArgs = {
 
 type generateOgFileArgs = {
   ogContent: {
-    title: string
+    title: string,
+    publishedDate: string | undefined,
+    path: string | undefined,
   },
   ogImageFileName: string,
   pathToStoreImage: string,
@@ -108,7 +110,9 @@ export const generateOgFile = async (args: generateOgFileArgs) => {
     { encoding: 'utf-8' }
   );
   const template  = Handlebars.compile(template_index);
-  const indexHtml = template({ title: args.ogContent.title });
+  const indexHtml = template({ 
+    ...args.ogContent
+  });
   
   let generatedFilePath = `generated/${args.ogImageFileName}.html`;
   let completeFilePath = `${staticContentFolder}/${generatedFilePath}`; 

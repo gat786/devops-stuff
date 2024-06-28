@@ -20,7 +20,10 @@ export const load = async ({ params }) => {
 
   const parsed_html = await marked.parse(file_matter.content);
 
-  let ogFileName = `${title.split(' ').join('-')}`;
+  let titleLower : string = title.toLowerCase()
+  let titleLowerWithoutSpace = titleLower.replaceAll(' ', '-');
+  let titleCleaned = titleLowerWithoutSpace.replaceAll(/[^0-9a-zA-Z_-]/g, '')
+  let ogFileName = `${titleCleaned}`;
   let ogFilePath = `/images/ogImages/${ogFileName}`
   await generateOgFile({
     ogContent: {

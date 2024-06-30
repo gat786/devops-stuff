@@ -1,7 +1,7 @@
 ---
-title: GH Actions (Multiple Jobs, using Secrets, Variables and Outputs Part 1)
+title: GH Actions - Multiple Jobs and Outputs
 created_on: 2024-06-10
-description: GH Actions Variables - Understanding Multi Job actions, using Secrets, Variables and Outputs Part 1
+description: GH Actions Variables - Understanding Multi Job actions and Outputs
 tags: ['Github', 'Github Actions', 'Devops', 'Automation', 'CI/CD']
 posterImage: /images/gh-actions/github-actions-variables.webp
 authors: ['ganesht049@gmail.com']
@@ -9,7 +9,7 @@ authors: ['ganesht049@gmail.com']
 
 ![Github Actions Variables](/images/gh-actions/github-actions-variables.webp)
 
-### GH Actions Variables - Understanding Multi Job actions, using Secrets, Variables and Outputs (Part - 1)
+### GH Actions Variables - Understanding Multi Job actions and Outputs
 
 > Note ->
 > 
@@ -85,4 +85,77 @@ Visually it would look something like this on actions summary page 👇
 ![Multiple jobs executing parallel visual with dependencies](/images/gh-actions/multi-execution-with-deps.png)
 
 See that visually as well you can see that the Upload Archive is shown as a 
-dependent on the previous 3 steps which run as parallel.
+dependent on the previous 3 steps which run as parallel. 
+
+
+And just like this you can run many jobs step by step which all depend on each 
+other to accomplish your necessary tasks.
+
+
+Lets look at other parts that I want to go over here, In my previous blog we 
+talked about environment variables I want to dig more deep into those here.
+We had learnt that we can define env variables at different stages of a workflow,
+For Example :-
+
+<script src="https://gist.github.com/gat786/4b7bda47cc305e86f2a37685f2f3dbbd.js"></script>
+
+The outputs of these commands would be 
+
+```
+$ echo "I am $NAME, I live in $PLACE and my favorite color is $COLOR"
+I am Ganesh, I live in Virar and my favorite color is Orange
+
+$ echo "You wouldn't know my favorite color: $COLOR, but you will know my name: $NAME and place: $PLACE"
+You wouldn't know my favorite color: , but you will know my name: Ganesh and place: Virar
+```
+
+You can also set the variables from within one step and those will also be 
+accessible throughout the entire job.
+For Example :-
+
+<script src="https://gist.github.com/gat786/a04285afc792b887d9af582f42f8fe5a.js"></script>
+
+which will give you an output like -
+
+```
+$ echo "fav fruit - $FAVOURITE_FRUIT" # Available to read across all the jobs in the same job \
+  echo "fav passtime: $FAVOURITE_PASSTIME" \
+  echo "fav game: $FAVOURITE_GAME"
+
+fav fruit - MANGO
+fav passtime: READING
+fav game: CRICKET
+```
+
+#### Github Outputs
+
+Notice that as we speaking about different things, none of the things which 
+are present in one job are accessible to another job, all the jobs have no 
+context of their sibling jobs data or processes by default, the only way to
+pass some information from a job to another job is to use something known as
+Github Outputs.
+
+For every job you can define some outputs that the job will expose and you
+can use those outputs in the other job that depends upon it. Notice that it
+can be only used by another job which depends on it. Lets see an example ->
+
+<script src="https://gist.github.com/gat786/e4fac3dbdb7a88db7972852b4f34b89e.js"></script>
+
+Outputs are string values that should be used to values which are generated
+in one of the steps and those which you want to export it to some other step
+to make some decision or otherwise. Outputs can be also exported across Jobs 
+using something like this ->
+
+<script src="https://gist.github.com/gat786/9266f0ba690e61692f3c80974a66c9e2.js"></script>
+
+Notice that we used the `needs` keyword here, when you are exporting an output
+to another job, it becomes necessary that the job which is requiring output is
+dependent on the job that creates it.
+
+I hope that makes it clear how multiple jobs can be executed in a manner you like
+and also how you can make it share some context so that it can make it your 
+life a bit easier.
+
+Thank you for going through this, lemme know in the comments if you did learn 
+something after reading this and if you found something confusing please do ping
+me with your questions.

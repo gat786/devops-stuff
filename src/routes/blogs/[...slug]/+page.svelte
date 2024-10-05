@@ -10,10 +10,26 @@
 
 
   let toastComponent: Toast;
+  let functionUrl = "https://vakgmiklrafgjbd7rwoy6sdx3e0dyrgf.lambda-url.us-east-1.on.aws/"
+
+  async function fetchPageViews(functionUrl: string, pageUrl: string) {
+    let response : any = await fetch(functionUrl, {
+      method: 'POST', 
+      body: JSON.stringify({
+        url: pageUrl,
+        method: 'add-view'
+      })
+    });
+    let data = await response.json();
+    console.log(data);
+    return data;
+  }
 
   onMount(() => {
     console.log('reloading for loading the gists properly');
     // location.reload();
+
+    fetchPageViews(functionUrl, `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`)
   });
   
 </script>

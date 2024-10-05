@@ -10,6 +10,11 @@
 
 
   let toastComponent: Toast;
+
+  onMount(() => {
+    console.log('reloading for loading the gists properly');
+    // location.reload();
+  });
   
 </script>
 

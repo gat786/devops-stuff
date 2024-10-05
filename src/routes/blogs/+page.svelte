@@ -22,7 +22,7 @@
             class="w-full md:w-48 h-48 object-cover" 
             alt={`poster for ${blog.front_matter.title}`} />
           <div class="flex flex-col my-4 mx-4 gap-4">
-            <a href={`/blogs/${blog.front_matter.url_postfix}`} >
+            <a href={`/blogs/${blog.front_matter.url_postfix}`} target="_blank">
               <h2 class="text-xl font-mono font-medium md:truncate line-clamp-2">{blog.front_matter.title}</h2>
             </a>
             <div class="text-sm font-thin">Date - {blog.front_matter.created_on.toLocaleDateString()}</div>

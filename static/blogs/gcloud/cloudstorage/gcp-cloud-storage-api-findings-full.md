@@ -21,12 +21,12 @@ it used to be all the time.)
 But anyway, this story begins when on a Friday evening just before we were about to
 say bye bye to work and go off for a weekend. A very cool senior of ours we will call him
 Raphael (for not leaking his name out), raised a message in our support channel mentioning
-that he was seeing bucket contents of a bucket which is in development folder and environment
-on the production folder and production environment project. 
+that he was seeing bucket contents of a bucket which is in production folder and production
+environment on the development folder and development environment project.
 
 At first, not gonna lie, I thought Raphael like every time is just messing with us, and probably
-nothing very wrong I ended up dismissing his message by telling him it shouldn't be happening.
-Maybe just refresh your browser. 
+nothing has happened, he just has a weird Browser syncing issue and thats it. I ended up
+dismissing his message by telling him it shouldn't be happening. Maybe just refresh your browser. 
 
 But before I had dismissed his message a colleague of mine had asked him out of curiosity what
 is the URL at which he was seeing this issue. He shared it.
@@ -42,7 +42,7 @@ https://console.cloud.google.com/storage/browser/our-bucket-in-direct-prod/some/
 
 And the UI that he was seeing looked something like this
 
-![Buckets Mishap Looks](/images/gcp/cloustorage/bucket-mishap.png)
+![Buckets Mishap](/images/gcp/cloustorage/bucket-mishap.png)
 
 Now this looked interesting since he had a URL to back it up.
 
@@ -116,12 +116,11 @@ I quickly went and checked the API Specs of Cloud Storage and it was very intere
 [Buckets Listing API Spec](https://cloud.google.com/storage/docs/json_api/v1/buckets/list)
 
 For listing the objects the storage APIs only need the correct bucket name and if you are properly 
-authenticated they should list you the objects which are inside them.
+authenticated they should list you the objects which are inside them. For Listing buckets though,
+you need a Project name. I find it interesting and probably would have never guessed it if 
+this incident wouldn't have happened. 
 
-For Listing buckets though, you need a Project name. I find it interesting and probably
-would have never guessed it if this incident wouldn't have happened. 
-
-While I was writing this document I found out that they write this in the Documentation
+While I was writing this document I found out that they (GCP) had writtten this in their Documentation
 very clearly, I hate to say it but I think I didn't read it with enough consciousness I guess.
 
 Here's what the documentation says -
@@ -160,3 +159,5 @@ up with some reasonable answer to this situation.
 My main concern was how did he get the URL in the first place, I don't think he found the
 buckets listed on the dev project and it is probably a mistake in copying and pasting
 the URL.
+
+Anyways I hope you found this interesting as well as learnt something, see you next time.

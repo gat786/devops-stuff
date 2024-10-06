@@ -2,14 +2,12 @@
 title: Gcloud Cloud Storage Apis are not we thought they were
 created_on: 2024-10-05
 description: In this blog I go over the recent findings I have had related to Gcloud Storage APIs
-tags: ["blog", "GCP", "Cloud Storage", "RestAPIs", "Confusing"]
+tags: ["blog", "GCP", "Cloud Storage", "RestAPIs", "Confusing", "Claude-Helped-me-Edit-It"]
 posterImage: /images/gcp/cloustorage/buckets-buckets-buckets.webp
 authors: ['ganesht049@gmail.com']
 ---
 
-
 ![Confusing Bucket Story](/images/gcp/cloustorage/buckets-buckets-buckets.webp)
-
 
 ### GCP Cloud Storage APIs are a bit confusing
 
@@ -20,13 +18,13 @@ I work as a DevOps Engineer and I have setup a good bunch of infrastructure for 
 sized company and work with supporting engineers a week in every month nowadays (Earlier
 it used to be all the time.)
 
-But anyways, this story begins when on a Friday evening just before we were about to
+But anyway, this story begins when on a Friday evening just before we were about to
 say bye bye to work and go off for a weekend. A very cool senior of ours we will call him
 Raphael (for not leaking his name out), raised a message in our support channel mentioning
 that he was seeing bucket contents of a bucket which is in development folder and environment
 on the production folder and production environment project. 
 
-At first, not gonna lie, I thought Raphael like everytime is just messing with us, and probably
+At first, not gonna lie, I thought Raphael like every time is just messing with us, and probably
 nothing very wrong I ended up dismissing his message by telling him it shouldn't be happening.
 Maybe just refresh your browser. 
 
@@ -52,11 +50,11 @@ I quickly jumped on the URL to confirm his findings and found out he was correct
 to see the buckets content from inside the development folder while the bucket was all the way
 in a completely different folder.
 
-I quickly came up to the conclusion that maybe the project names dont matter to the GCP Storage APIs
+I quickly came up to the conclusion that maybe the project names don't matter to the GCP Storage APIs
 as long as it has the proper bucket name and you have proper IAM permissions it will list you
 the bucket contents.
 
-Meanwhile, My colleague (Lets call him Chad) who digged into this by asking the URL also found
+Meanwhile, My colleague (Let's call him Chad) who dug into this by asking the URL also found
 something interesting, while I went the browser way of investigation he went console mode and
 quickly shared with me a command
 
@@ -67,8 +65,8 @@ gcloud storage ls --recursive gs://that-bucket-in-direct-prod --project=that-pro
 Mind you that we also have a VPC SC Firewall defined in our organisation that stops requests
 from development folder landing into production folder yet this went through somehow.
 
-I dont know why but this was interesting to me as I knew that I could have gotten finers details
-using this method but I never thought about it. Anyways as soon as he shared me this query I knew
+I don't know why but this was interesting to me as I knew that I could have gotten finer details
+using this method but I never thought about it. Anyway as soon as he shared me this query I knew
 what I had to do, I authenticated my Gcloud CLI as well and flared this command with a verbosity
 level of 8
 
@@ -91,7 +89,7 @@ DEBUG: https://storage.googleapis.com:443 "GET /storage/v1/b/that-bucket-in-dire
 
 This was really interesting. 
 
-I found out that the APIs didn't use the project name anywhere I could just put anythint here.
+I found out that the APIs didn't use the project name anywhere I could just put anything here.
 
 ```
 gcloud storage ls --recursive gs://that-bucket-in-direct-prod --project=some-rubbish-garbage --verbosity debug
@@ -112,7 +110,7 @@ DEBUG: https://storage.googleapis.com:443 "GET /storage/v1/b/that-bucket-in-dire
 
 and it would still give me the answers I want.
 
-I quickly went and checked the API Specs of Cloud Storage and it was very interesting for me to see thi
+I quickly went and checked the API Specs of Cloud Storage and it was very interesting for me to see this
 
 [Objects Listing API Spec](https://cloud.google.com/storage/docs/json_api/v1/objects/list)
 [Buckets Listing API Spec](https://cloud.google.com/storage/docs/json_api/v1/buckets/list)
@@ -124,7 +122,7 @@ For Listing buckets though, you need a Project name. I find it interesting and p
 would have never guessed it if this incident wouldn't have happened. 
 
 While I was writing this document I found out that they write this in the Documentation
-very clearly, I hate to say it but I think I didn't read it with enough conciousness I guess.
+very clearly, I hate to say it but I think I didn't read it with enough consciousness I guess.
 
 Here's what the documentation says -
 
@@ -154,11 +152,11 @@ Here's what the documentation says -
 
 [Link to the complete document](https://cloud.google.com/storage/docs/buckets#considerations)
 
-Anyways, it is still a mystery how Raphael ended up landing in that page with that URL.
+Anyway, it is still a mystery how Raphael ended up landing in that page with that URL.
 I wrote all of these things that I have written here and sent it to him as a message.
 And thanks to Chad for bringing my tired Friday Evening brain to start thinking and come
 up with some reasonable answer to this situation. 
 
-My main concern was how did he get the URL in the first place, I dont't think he found the
+My main concern was how did he get the URL in the first place, I don't think he found the
 buckets listed on the dev project and it is probably a mistake in copying and pasting
 the URL.

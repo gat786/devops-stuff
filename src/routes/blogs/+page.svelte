@@ -21,7 +21,7 @@
             src={`${blog.front_matter.posterImage}`} 
             class="w-full md:w-48 h-48 object-cover" 
             alt={`poster for ${blog.front_matter.title}`} />
-          <div class="flex flex-col my-4 mx-4 gap-4">
+          <div class="flex flex-col my-4 mx-4 gap-4 md:w-2/3">
             <a href={`/blogs/${blog.front_matter.url_postfix}`} target="_blank">
               <h2 class="text-xl font-mono font-medium md:truncate line-clamp-2">{blog.front_matter.title}</h2>
             </a>

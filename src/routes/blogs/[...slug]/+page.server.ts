@@ -5,6 +5,7 @@ import { marked } from 'marked';
 import { blog_folder_prefix } from '$lib/constants'
 import type { Blog } from '$lib/models/blog';
 import { generateOgFile } from "$lib/og-generator";
+import { setupPageViews } from "$lib/server/create-page-for-views";
 
 
 export const load = async ({ params }) => {
@@ -34,6 +35,11 @@ export const load = async ({ params }) => {
     ogImageFileName: ogFileName,
     pathToStoreImage: ogFilePath
   });
+
+  let page_id = `https://devops-stuff.dev/blogs/${path}`;
+  console.log('Setting up page views for: ', page_id);
+
+  await setupPageViews(page_id);
 
   let blog: Blog = {
     front_matter: { 

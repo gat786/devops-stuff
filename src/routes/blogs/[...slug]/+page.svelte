@@ -8,18 +8,20 @@
   import Toast from '../../../components/toast.svelte';
   import { ToastType } from '$lib/models/toasttype';
   import { browser } from '$app/environment';
-  import { getPageViews } from '$lib/get-page-views';
+  import { addPageView, getPageViews } from '$lib/get-page-views';
 
 
   let toastComponent: Toast;
 
-  if (browser) {
-    let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
-    getPageViews(page_id);
-  }
+  
+  let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
+  let countPromise = getPageViews(page_id);
+  
+
 
   onMount(() => {
     console.log('reloading for loading the gists properly');
+    addPageView(page_id);
   });
   
 </script>
@@ -48,6 +50,14 @@
         Author('s) - {data.front_matter.authors.join(', ')}
       </div>
     </div>
+    <div class="my-4">
+      {#await countPromise}
+        Loading Page count
+      {:then count} 
+        Page Views - {count.count}
+      {/await}
+    </div>
+
     <div>
       ----------------------------------------
     </div>

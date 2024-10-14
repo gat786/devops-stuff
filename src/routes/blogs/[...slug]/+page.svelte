@@ -9,16 +9,12 @@
   import { ToastType } from '$lib/models/toasttype';
   import { browser } from '$app/environment';
   import { addPageView, getPageViews } from '$lib/get-page-views';
-
-
+  
   let toastComponent: Toast;
 
-  
   let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
   let countPromise = getPageViews(page_id);
   
-
-
   onMount(() => {
     console.log('reloading for loading the gists properly');
     addPageView(page_id);

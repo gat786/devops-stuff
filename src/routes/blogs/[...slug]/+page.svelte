@@ -14,10 +14,19 @@
 
   let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
   let countPromise = getPageViews(page_id);
-  
+  let localhost    = "localhost"
+
   onMount(() => {
+    let host = window.location.host;
+    if (host.includes(localhost)) {
+      console.log('running on localhost, adding a pageview would be cheating.');
+      return;
+    }
+    else {
+      console.log('running on production, we can add a pageview.');
+      addPageView(page_id);
+    }
     console.log('reloading for loading the gists properly');
-    addPageView(page_id);
   });
   
 </script>

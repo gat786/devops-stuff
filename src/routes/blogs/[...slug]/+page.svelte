@@ -9,6 +9,7 @@
   import { ToastType } from '$lib/models/toasttype';
   import { browser } from '$app/environment';
   import { addPageView, getPageViews } from '$lib/get-page-views';
+    import Bottombar from '../../../components/bottombar.svelte';
   
   let toastComponent: Toast;
 
@@ -17,6 +18,16 @@
   let localhost    = "localhost"
 
   onMount(() => {
+    addEventListener("scroll", (event) => {
+      let scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 90) {
+        toastComponent.invokeShowTooltip({ 
+          _componentType: ToastType.INFO, 
+          _message: "Thank you for reading my blog this far, Hope you enjoyed it. Please leave a comment if you have any feedback." 
+        });
+      }
+    });
+    
     let host = window.location.host;
     if (host.includes(localhost)) {
       console.log('running on localhost, adding a pageview would be cheating.');
@@ -87,5 +98,6 @@
   <Comments website-id={11051} page-id={`blogs/${data.front_matter.url_postfix}`} />
   <div class="fixed bottom-10 left-10 z-10">
   </div>
-    <Toast bind:this={toastComponent}/>
+  <Toast bind:this={toastComponent}/>
+  <Bottombar />
 </div>

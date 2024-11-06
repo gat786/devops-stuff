@@ -414,8 +414,92 @@ Lets start by playing with each of these to explain their uses.
   iam_policy you will see that it is trying to remove all the different bindings
   we have in workspace 2 as well as workspace 3.
 
-5. gcp_project_iam_member
+3. gcp_project_iam_member
 
-  
+  As per the documentation
+
+  > Non-authoritative. Updates the IAM policy to grant a role to a new member.
+  Other members for the role for the project are preserved.
+
+  As per the documentation, its non-authoritative meaning it will not replace
+  anything. It will just add a user to a binding if it already exists or create
+  a new binding if it doesn't exist and add the user.
+
+  I recommend using this is your infrastructure if you are building infrastructure
+  for applications that span across teams and follow a microservice 
+  architecture.
+
+  Lets see an example for this.
+
+  ```
+  resource "google_project_iam_member" "cloudsql_instanceuser" {
+    project = "curious-checking-stuff"
+    role    = "roles/cloudsql.instanceUser"
+    member  = "user:ganesht049@gmail.com"
+  }
+
+  resource "google_project_iam_member" "cloudsql_instanceuser2" {
+    project = "curious-checking-stuff"
+    role    = "roles/cloudsql.instanceUser"
+    member  = "user:me@gats.dev"
+  }
+  ```
+
+  if we create a seperate terraform workspace and use this code to create some
+  iam members for us we will see that it actually creates a new binding for us
+  and then adds the first user there and then in the same binding it adds the
+  second user as well.
+
+  ```
+  {
+    "bindings": [
+      {
+        "members": [
+          "user:me@gats.dev"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "condition": {
+          "description": "Expiring at midnight of 2025-01-01",
+          "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+          "title": "expires_after_2025_01_01"
+        },
+        "members": [
+          "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "members": [
+          "user:ganesht049@gmail.com"
+          "user:me@gats.dev"
+        ],
+        "role": "roles/cloudsql.instanceUser"
+      },
+      {
+        "members": [
+          "user:ganesht049@gmail.com",
+        ],
+        "role": "roles/owner"
+      }
+    ],
+    "etag": "BwYmQk121oc=",
+    "version": 3
+  }
+  ```
+
+  The same will happen if we were to create another workspace and add a few new
+  iam members there. IAM members never overwrite any other members, they just get
+  added to a binding if it already exists or if it doesn't exist it gets created
+  first.
+
+  😌😌😮‍💨
+
+  This was a long one and it took me a long time to write up as well.
+
+  Let me know if you liked it and learned something from it.
+  See you in the next one.
+
   
 

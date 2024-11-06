@@ -287,6 +287,135 @@ Lets start by playing with each of these to explain their uses.
   preserved.
 
   This changes a specific binding that is inside the project iam policy. Which binding
-  it changes is matched by 
+  it changes is matched by the role. There may exists situations where you have
+  many bindings for the same role, in that case you should have different 
+  conditions differentiating between them, the binding with update the binding
+  authoritatively.
+
+  Lets look at an example, (We will do this demo in another terraform workspace)
+
+  ```hcl
+  resource "google_project_iam_binding" "cloudsql_admin" {
+    project = "curious-checking-stuff"
+    role    = "roles/cloudsql.admin"
+    members = [
+      "user:ganesht049@gmail.com" 
+    ]
+  }
+
+  resource "google_project_iam_binding" "cloudsql_admin_cond" {
+    project = "curious-checking-stuff"
+    role    = "roles/cloudsql.admin"
+    members = [
+      "user:ganesht049@gmail.com"
+    ]
+
+    condition {
+      title       = "expires_after_2025_01_01"
+      description = "Expiring at midnight of 2025-01-01"
+      expression  = "request.time < timestamp('2025-01-01T00:00:00Z')"
+    }
+  }
+  ```
+
+  We can apply this and it should create two different bindings in the same
+  policy file, that we saw earlier, after applying this you would see an update
+  to the policy file and it would come out as looking like
+
+  ```
+  > g projects get-iam-policy curious-checking-stuff --format json
+  {
+    "bindings": [
+      {
+        "members": [
+          "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "condition": {
+          "description": "Expiring at midnight of 2025-01-01",
+          "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+          "title": "expires_after_2025_01_01"
+        },
+        "members": [
+          "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "members": [
+         "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/owner"
+      }
+    ],
+    "etag": "BwYmNrGVGag=",
+    "version": 3
+  }
+  ```
+
+  I want to show the authoritativeness of these policies so I Will create 
+  another workspace and try to create another binding which has a role and
+  conditions similar to what we have here.
+
+  For example we will create something like this (in a different terraform
+  workspace)
+
+  ```
+  resource "google_project_iam_binding" "cloudsql_admin_again" {
+    project = "curious-checking-stuff"
+    role    = "roles/cloudsql.admin"
+    members = [
+      "user:me@gats.dev"
+    ]
+  }
+  ```
+
+  It will remove the user (ganesht049) in the same binding which is present in our first 
+  workspace and add the newer user(gats.dev). For example the project policy will
+  look like this when this code is applied
+
+  ```
+  > g projects get-iam-policy curious-checking-stuff --format json                                   
+  {
+    "bindings": [
+      {
+        "members": [
+          "user:me@gats.dev"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "condition": {
+          "description": "Expiring at midnight of 2025-01-01",
+          "expression": "request.time < timestamp('2025-01-01T00:00:00Z')",
+          "title": "expires_after_2025_01_01"
+        },
+        "members": [
+          "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/cloudsql.admin"
+      },
+      {
+        "members": [
+          "user:ganesht049@gmail.com"
+        ],
+        "role": "roles/owner"
+      }
+    ],
+    "etag": "BwYmNsIg5k4=",
+    "version": 3
+  }
+  ```
+
+  and this back and forth will keep on happening in the two workspaces where you
+  have bindings created. Also if you go back to our 1st workspace where we applied
+  iam_policy you will see that it is trying to remove all the different bindings
+  we have in workspace 2 as well as workspace 3.
+
+5. gcp_project_iam_member
+
+  
   
 

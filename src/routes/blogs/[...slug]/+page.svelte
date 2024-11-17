@@ -78,9 +78,7 @@
       {/await}
     </div>
 
-    <div>
-      ----------------------------------------
-    </div>
+    <div class="css-dashes"/>
   </div>
   <article id="blog-content" class="prose dark:prose-invert mt-4 mx-8 w-10/12">
     {@html data.content}
@@ -89,9 +87,7 @@
     {data.content}
   </article>
 
-  <div class="my-8">
-    ----------------------------------------
-  </div>
+  <div class="css-dashes my-12"/>
 
   <div class="my-8 text-2xl font-thin text-center">
     Thank you for reading my blog, <br/>

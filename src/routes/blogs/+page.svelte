@@ -20,16 +20,21 @@
 <main class="flex flex-col my-6 items-center">
   <h2 class="text-xl font-bold font-mono">Latest Blogs</h2>
   <div class="">
-    <ul class="flex flex-col w-full gap-y-8 my-12 mx-8 md:mx-0">
+    <ul class="flex flex-col gap-y-8 my-12 mx-8 md:mx-0">
       {#each data.blogs as blog}
-        <li>
-          <a 
+        <li class="">
+          <a
             href={`/blogs/${blog.front_matter.url_postfix}`}
-            class="font-light hover:font-medium mx-auto"
+            class="font-light mx-auto hover:font-medium"
             target="_blank">
-            <span class="text-sm font-thin dark:text-gray-200 underline underline-offset-4 ow">
-              {blog?.front_matter?.created_on?.toLocaleDateString()}
-            </span>
+            <div class="text-sm font-thin dark:text-gray-200">
+              <span class="">
+                Date:
+              </span>
+              <span class="underline underline-offset-4">
+                {blog?.front_matter?.created_on?.toLocaleDateString()}
+              </span>
+            </div>
             <br/>
             <span class="text-lg text-black dark:text-white">
               {blog.front_matter.title}

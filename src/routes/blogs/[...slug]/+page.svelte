@@ -9,22 +9,26 @@
   import { ToastType } from '$lib/models/toasttype';
   import { browser } from '$app/environment';
   import { addPageView, getPageViews } from '$lib/get-page-views';
-    import Bottombar from '../../../components/bottombar.svelte';
+  import Bottombar from '../../../components/bottombar.svelte';
+  import { writable } from 'svelte/store';
   
   let toastComponent: Toast;
 
   let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
   let countPromise = getPageViews(page_id);
   let localhost    = "localhost"
+  let canShowToast = writable(true);
 
   onMount(() => {
     addEventListener("scroll", (event) => {
       let scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      if (scrollPercent > 90) {
+      console.log("Can show toast", $canShowToast);
+      if (scrollPercent > 90 && $canShowToast) {
         toastComponent.invokeShowTooltip({ 
           _componentType: ToastType.INFO, 
           _message: "Thank you for reading my blog this far, Hope you enjoyed it. Please leave a comment if you have any feedback." 
         });
+        canShowToast.set(false);
       }
     });
     

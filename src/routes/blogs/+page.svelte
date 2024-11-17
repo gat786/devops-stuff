@@ -6,18 +6,8 @@
 </script>
 
 <style>
-  li {
-    list-style-type: none;
-    padding: 1rem;
-    border-bottom: 1px solid #ccc;
-  }
-
-  li a {
-    /* wrap text in 1 line */
-    white-space: nowrap;
-    text-decoration: none;
-
-    color: #333;
+  .ow{
+    overflow-wrap: break-word;
   }
 </style>
 
@@ -27,28 +17,24 @@
   <title>Latest Blogs</title>
 </head>
 
-<main class="flex flex-col items-center mt-4 w-full">
+<main class="flex flex-col my-6 items-center">
   <h2 class="text-xl font-bold font-mono">Latest Blogs</h2>
-  <div class="border border-black p-2">
-    <ul class="w-full flex flex-col">
+  <div class="">
+    <ul class="flex flex-col w-full gap-y-8 my-12 mx-8 md:mx-0">
       {#each data.blogs as blog}
         <li>
           <a 
             href={`/blogs/${blog.front_matter.url_postfix}`}
-            class="font-light hover:font-medium"
+            class="font-light hover:font-medium mx-auto"
             target="_blank">
-            <h1 class="text-lg text-black dark:text-white">
+            <span class="text-sm font-thin dark:text-gray-200 underline underline-offset-4 ow">
+              {blog?.front_matter?.created_on?.toLocaleDateString()}
+            </span>
+            <br/>
+            <span class="text-lg text-black dark:text-white">
               {blog.front_matter.title}
-            </h1>
+            </span>
           </a>
-
-          <div class="text-sm font-thin">
-            Date - {blog.front_matter.created_on.toLocaleDateString()}
-          </div>
-
-          <div class="text-sm font-thin">
-            Authors - {blog.front_matter.authors.join(", ")}
-          </div>
         </li>
       {/each}
   

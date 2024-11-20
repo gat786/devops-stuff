@@ -1,9 +1,7 @@
 <script lang="ts">
-    import Heading from "../../components/heading.svelte";
     import type { PageData } from "./$types";
     export let data: PageData;
 </script>
-<Heading/>
 
 <svelte:head>
   <title>Content Policy for Devops-Stuff Website</title>

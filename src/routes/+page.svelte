@@ -2,8 +2,6 @@
 	<title>Devops Stuff</title>
 </header>
 
-<Heading />
-
 <ul class="text-center font-medium my-12 gap-4 flex-row">
   <li>
     <a href="/blogs">
@@ -34,5 +32,4 @@
 </style>
 
 <script lang="ts">
-  import Heading from "../components/heading.svelte";
 </script>

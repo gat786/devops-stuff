@@ -11,8 +11,6 @@
   }
 </style>
 
-<Heading/>
-
 <head>
   <title>Latest Blogs</title>
 </head>

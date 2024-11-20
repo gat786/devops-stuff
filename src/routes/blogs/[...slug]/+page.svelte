@@ -55,8 +55,6 @@
   <meta property="og:type" content="article" />
 </svelte:head>
 
-<Heading />
-
 <div class="flex flex-col items-center w-screen">
   <div id="sticky-item" class="flex flex-col items-center w-2/3 ">
     <h2 class="text-2xl font-bold mt-4 text-center">

@@ -4,6 +4,7 @@
 	import XMark from "../lib/icons/x-mark.svelte";
 	import Footer from "../components/footer.svelte";
   import { afterUpdate, onMount } from "svelte";
+  import Heading from "../components/heading.svelte";
 
 	let showZoomyImage = false;
 	let imageUrlToShow: String | null = null;
@@ -48,6 +49,8 @@
 </script>
 
 <div>
+	<Heading/>
+	
 	{#if showZoomyImage}
 		<div class="fixed z-30 bg-black bg-opacity-80 h-full w-full">
 			<button 

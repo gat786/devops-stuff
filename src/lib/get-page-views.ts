@@ -1,6 +1,8 @@
 
+const counter_app_base_url = "https://page-view-counter.apps.gats.dev"
+
 export const getPageViews = async (page_id: string) => {
-  let response = await fetch(`https://counter.gats.dev/get-views`, {
+  let response = await fetch(`${counter_app_base_url}/get-views`, {
     method: 'POST', 
     body: JSON.stringify({'page_id': page_id}),
     headers: {
@@ -11,7 +13,7 @@ export const getPageViews = async (page_id: string) => {
 }
 
 export const addPageView = async (page_id: string) => {
-  let response = await fetch(`https://counter.gats.dev/add-view`, {
+  let response = await fetch(`${counter_app_base_url}/add-view`, {
     method: 'POST', 
     body: JSON.stringify({'page_id': page_id}),
     headers: {

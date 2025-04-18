@@ -36,7 +36,8 @@ export const load = async ({ params }) => {
     pathToStoreImage: ogFilePath
   });
 
-  let page_id = `https://devops-stuff.dev/blogs/${path}`;
+  let page_id = `devops-stuff.dev/blogs/${path}`;
+  page_id = page_id.replaceAll("/","")
   console.log('Setting up page views for: ', page_id);
 
   await setupPageViews(page_id);

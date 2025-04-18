@@ -14,7 +14,8 @@
   
   let toastComponent: Toast;
 
-  let page_id = `https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
+  let page_id = `devops-stuff.dev/blogs/${data.front_matter.url_postfix}`;
+  page_id = page_id.replaceAll("/","")
   let countPromise = getPageViews(page_id);
   let localhost    = "localhost"
   let canShowToast = writable(true);
@@ -72,7 +73,7 @@
       {#await countPromise}
         Loading Page count
       {:then count} 
-        Page Views - {count.count}
+        Page Views - {count.view_count}
       {/await}
     </div>
 

@@ -102,6 +102,4 @@ resource "google_compute_backend_bucket" "static_website" {
 }
 ```
 
-4. A Static IP address
-
 ```hcl

@@ -94,7 +94,13 @@ To truly set it up like a website behind an ip address you need
 
 3. A Compute Backend Bucket Service
 
+Setup the bucket as a backend service for it to be able to be attached to a
+Compute URL Map. A Compute URL Map is a set of rules which can be setup on a
+target proxy according to which the proxy redirects requests which are
+received on it.
+
 ```hcl
+
 resource "google_compute_backend_bucket" "static_website" {
   name        = "static-website-backend"
   bucket_name = google_storage_bucket.static_website.name
@@ -102,4 +108,80 @@ resource "google_compute_backend_bucket" "static_website" {
 }
 ```
 
+4. Static IP address
+It is mostly a good practice to reserve a static ip for your website since it
+gives your users a single internet address where they know your website exists.
 ```hcl
+# Reserve IP address
+resource "google_compute_global_address" "ip" {
+  name = "static-web-app-ip"
+}
+```
+
+5. GCP Managed SSL Certificate -
+
+An SSL certificate is something which enables browsers to open up encrypted
+connections from their machine to our apps. It is essential so that the traffic
+which is intended for your service is not captured by an evil bystander.
+
+> To be provision correctly it requires that the domain name is pointed towards
+the IP address that we procured for the website.
+
+```hcl
+resource "google_compute_managed_ssl_certificate" "default" {
+  name        = "static-bucket-cert"
+  description = "SSL certificate for static bucket"
+  managed {
+    domains = [
+      "your-domain.com"
+    ]
+  }
+}
+```
+
+6. HTTP target proxy
+
+This HTTPS Proxy is the actual thing which takes the rules defined in url map
+and distribute traffic according to it. Each Service that gets exposed on GCP
+to be used is behind a proxy. This Proxy acts as a TLS termination point where
+the encrypted connection between clients and your app is ended and request is
+then routed to your actual instance.
+
+```hcl
+resource "google_compute_target_https_proxy" "default" {
+  name    = "http-lb-proxy"
+  url_map = google_compute_url_map.default.id
+
+  ssl_certificates = [
+    google_compute_managed_ssl_certificate.default.id
+  ]
+}
+```
+8. Create forwarding rule (This creates the actual loadbalancer resource on GCP)
+
+Creating a global forwarding rule means that you are creating the loadbalancer
+resource. This is our final piece of the puzzle and once we execute the entire terraform
+code written uptil here we will have a website running that is serving our content.
+
+YAY.
+
+```hcl
+resource "google_compute_global_forwarding_rule" "default" {
+  name                  = "http-lb-forwarding-rule"
+  ip_protocol           = "TCP"
+  load_balancing_scheme = "EXTERNAL"
+  port_range            = "443"
+  target                = google_compute_target_https_proxy.default.id
+  ip_address            = google_compute_global_address.default.id
+}
+```
+
+While creating this tutorial I created a static website myself
+that is hosted on my GCP account and it is available here
+
+https://static-bucket.apps.gats.dev
+
+You can visit this website and see the actual contents for an example
+
+Thank you for reading!
+Have a great day!

@@ -185,3 +185,24 @@ You can visit this website and see the actual contents for an example
 
 Thank you for reading!
 Have a great day!
+
+
+----
+
+Time of this update - 2nd June 2025
+
+I am adding a brief update regarding the costs of this setup, this setup has been
+running for a month now atleast and I just saw the billing details on my GCP account
+related to this and thought I should add the details here as well.
+
+For hosting this static website I had to pay
+
+52 Indian Rupees or about 0.61$ everyday for costs on Networking SKU called
+`Cloud Load Balancer Forwarding Rule Minimum Global` which translated to about
+1580 Indian Rupees a month that is somewhere around 18.53$. I was expecting some
+costs but honestly this was more than I expected since you can get away with hosting
+such a site on vercel/netlify/github-pages for almost free without any costs.
+
+Fun experiment none the less. I am now turning off the website so that I dont pay
+18$ every month to google for almost nothing. so you might not see the website
+alive anymore.

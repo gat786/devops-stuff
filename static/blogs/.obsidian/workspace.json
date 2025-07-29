@@ -1,0 +1,177 @@
+{
+  "main": {
+    "id": "444641a243cb79e3",
+    "type": "split",
+    "children": [
+      {
+        "id": "2ade340395c0c824",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f18139b88c56a352",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "gcloud/cloud-run/personal-ci-cd-strategy.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "personal-ci-cd-strategy"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6f97fe179dc7559b",
+    "type": "split",
+    "children": [
+      {
+        "id": "0a4d3b1705c88305",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "84ed1984c9be94c7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "943f5b0290f37162",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8041109014e97023",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ddd66a42dda77086",
+    "type": "split",
+    "children": [
+      {
+        "id": "a3a5fab53cc9b59c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18006dd129cb7484",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "gcloud/cloud-run/personal-ci-cd-strategy.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for personal-ci-cd-strategy"
+            }
+          },
+          {
+            "id": "1508627b92745fc4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "gcloud/cloud-run/personal-ci-cd-strategy.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from personal-ci-cd-strategy"
+            }
+          },
+          {
+            "id": "d5e194d8835fda98",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "a5ea6183bb30c2d2",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "gcloud/cloud-run/personal-ci-cd-strategy.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of personal-ci-cd-strategy"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "f18139b88c56a352",
+  "lastOpenFiles": [
+    "gcloud/cloud-run/personal-ci-cd-strategy.md",
+    "gcloud/cloud-run",
+    "Untitled"
+  ]
+}

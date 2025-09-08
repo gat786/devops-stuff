@@ -22,6 +22,22 @@ authors: ['ganesht049@gmail.com']
 
 ![A Boy using a Computer that is Workload Identity Federated](/images/gcp/boy-aws-gcp-identity.png)
 
+> This situation is an imaginary one, if you are a DevOps/Security Person, you know
+its a wrong ask, but it is a common scenario, in big companies where they have
+strict rules but also needs of people from time to time to get things done quickly.
+
+Ever been in a situation where somebody from some god knows what department,
+(but hey, its a very important one, atleast your manager says so) comes knocking
+down your door at your department office and starts asking you to provide them
+with a GCP Service Account key, of the infrastructure that you manage and you know
+that you don't even create it for yourself, but now you have to create it for them??
+
+> Again, if you dont know, creating a service account credential is a bad practice and
+can lead to security breaches if those keys once created are not properly managed.
+
+It sounds bad, and it is. But do you have any solution? (Maybe you have, but if you
+don't, you can use Workload Identity Federation. 🎉🥳)
+
 Workload Identity Federation is a technology of Google and is prevalent on GCP
 using which you can configure a workload that is running on GCP or somewhere
 else (if it meets some requirements), to safely use local (specific to that workload)
@@ -38,6 +54,7 @@ what it claims to be, and then uses that credentials to reach out to GCP and
 assume GCP Service Account identity.
 
 ![External Identity Providers that you can use with WIF](/images/gcp/external-identities-gcp.png)
+_List of external Workloads that you can authenticate as a GCP Service Account using WIF_
 
 Crazy tech, but they have managed to keep it very simple (atleast I think it is
 simple, it might be confusing, but thats what I am trying to solve here). It

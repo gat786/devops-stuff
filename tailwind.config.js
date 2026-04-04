@@ -1,11 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindTypography from "@tailwindcss/typography";
+
 export default {
-  content: ['./src/**/*.{html,js,ts,svelte}'],
+  content: ["./src/**/*.{html,js,ts,svelte}"],
   theme: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/typography')
-  ],
-  darkMode: 'selector'
-}
+  plugins: [tailwindTypography],
+  darkMode: "selector",
+};

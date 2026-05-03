@@ -1,5 +1,5 @@
 ---
-title: Using SSH Keys to access GitHub Securely
+title: Using SSH Keys to Make Connectivity Simpler and Secure
 created_on: 2026-05-03
 description: |
   This blogs delves into details about how you can use SSH Keys to 
@@ -12,7 +12,7 @@ authors: ['ganesht049@gmail.com']
 
 ![Cartoonish representation of a person using ssh on a computer terminal emulator](/images/ssh/secure-ssh-terminal.png)
 
-## Using SSH Keys to access GitHub Securely
+## Using SSH Keys to Make Connectivity Simpler and Secure
 
 ### Introduction and Defining the Problem Statement
 

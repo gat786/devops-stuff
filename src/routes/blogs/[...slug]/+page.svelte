@@ -4,10 +4,8 @@
     export let data: PageData;
     import { onMount } from "svelte";
 
-    import Heading from "../../../components/heading.svelte";
     import Toast from "../../../components/toast.svelte";
     import { ToastType } from "$lib/models/toasttype";
-    import { browser } from "$app/environment";
     import { addPageView, getPageViews } from "$lib/get-page-views";
     import Bottombar from "../../../components/bottombar.svelte";
     import { writable } from "svelte/store";
@@ -63,6 +61,18 @@
     />
     <meta property="og:type" content="article" />
 </svelte:head>
+
+<head>
+    <title>{data.front_matter.title}</title>
+    <meta property="og:title" content={data.front_matter.title} />
+    <meta property="og:description" content={data.front_matter.description} />
+    <meta property="og:image" content={data.front_matter.ogFilePath} />
+    <meta
+        property="og:url"
+        content={`https://devops-stuff.dev/blogs/${data.front_matter.url_postfix}`}
+    />
+    <meta property="og:type" content="article" />
+</head>
 
 <div class="flex flex-col items-center w-screen">
     <div id="sticky-item" class="flex flex-col items-center w-2/3">

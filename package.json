@@ -1,6 +1,9 @@
 {
   "name": "devops-stuff",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite dev",
     "local": "vite dev --host",

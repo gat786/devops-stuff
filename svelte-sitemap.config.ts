@@ -2,7 +2,7 @@
 import type { OptionsSvelteSitemap } from "svelte-sitemap";
 
 const config: OptionsSvelteSitemap = {
-  domain: "https://www.example.com",
+  domain: "https://devops-stuff.dev",
   trailingSlashes: true,
   // ...more options below
 };
